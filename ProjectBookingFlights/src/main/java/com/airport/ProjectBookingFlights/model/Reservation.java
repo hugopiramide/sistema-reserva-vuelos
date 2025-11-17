@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.airport.ProjectBookingFlights.model.enums.Status;
 import com.airport.ProjectBookingFlights.model.vo.Passengers;
-import com.airport.ProjectBookingFlights.model.vo.UserEmail;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -27,10 +26,6 @@ public class Reservation {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long reservation_id;
- 
-    @Embedded
-    @AttributeOverride(name = "email", column = @Column(name = "user_email", length = 120, nullable = false))
-    private UserEmail userEmail;
 
     @Embedded
     @AttributeOverride(name = "total", column = @Column(name = "passengers", length = 4))
@@ -50,9 +45,9 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(UserEmail userEmail, Passengers passengers, LocalDateTime bookingDate, Status status,
+    public Reservation(Long reservation_id, Passengers passengers, LocalDateTime bookingDate, Status status,
             Flight flight) {
-        this.userEmail = userEmail;
+        this.reservation_id = reservation_id;
         this.passengers = passengers;
         this.bookingDate = bookingDate;
         this.status = status;
@@ -65,14 +60,6 @@ public class Reservation {
 
     public void setReservation_id(Long reservation_id) {
         this.reservation_id = reservation_id;
-    }
-
-    public UserEmail getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(UserEmail userEmail) {
-        this.userEmail = userEmail;
     }
 
     public Passengers getPassengers() {
@@ -101,7 +88,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation [reservation_id=" + reservation_id + ", userEmail=" + userEmail + ", passengers="
+        return "Reservation [reservation_id=" + reservation_id + ", passengers="
                 + passengers + ", bookingDate=" + bookingDate + ", status=" + status + ", flight=" + flight + "]";
     }
     
