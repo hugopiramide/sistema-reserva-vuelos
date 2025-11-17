@@ -1,5 +1,7 @@
 package com.airport.ProjectBookingFlights.model;
 
+import com.airport.ProjectBookingFlights.model.vo.City;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
