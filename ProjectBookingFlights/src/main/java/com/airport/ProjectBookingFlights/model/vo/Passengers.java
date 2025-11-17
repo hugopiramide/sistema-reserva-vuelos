@@ -14,6 +14,7 @@ public final class Passengers{
     }
 
     public Passengers(Integer total){
+        if(total < 0) throw new ArrayIndexOutOfBoundsException("El valor no puede ser negativo"); // Mejorable este Exception
         this.total = total;
     }
 
