@@ -34,11 +34,11 @@ public class Flight {
 
     @Column(name = "departure_time", nullable = false)
     private LocalDateTime departureTime;
-    @Column(name = "arrivalTime", nullable = true)
+    @Column(name = "arrival_time", nullable = true)
     private LocalDateTime arrivalTime;
     @Column(name = "capacity", nullable = false, length = 4)
     private Integer capacity;
-    @Column(name = "availableSeats", length = 4)
+    @Column(name = "available_seats", length = 4)
     private Integer availableSeats;
     
     @ManyToMany
