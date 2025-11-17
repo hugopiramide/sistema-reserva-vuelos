@@ -2,6 +2,10 @@ package com.airport.ProjectBookingFlights.model;
 
 import java.time.LocalDateTime;
 
+import com.airport.ProjectBookingFlights.model.enums.Status;
+import com.airport.ProjectBookingFlights.model.vo.Passengers;
+import com.airport.ProjectBookingFlights.model.vo.UserEmail;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -12,7 +16,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.OverridesAttribute;
 
 @Entity
 @Table(name = "reservation")
