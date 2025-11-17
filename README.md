@@ -18,6 +18,14 @@
 
 - Relación: Muchos a Uno (ManyToOne) desde Reservation a Flight.
 
+### Flight y Service
+
+- Un Flight ofrece varios Service
+
+- Un Service puede ser ofrecido en varios Flights
+
+- Relación: Muchos a Muchos (ManyToMany) desde Flight a Service
+
 ## Modelo Previsto
 
 <img src="./Model.svg" alt="Modelo de clases">
