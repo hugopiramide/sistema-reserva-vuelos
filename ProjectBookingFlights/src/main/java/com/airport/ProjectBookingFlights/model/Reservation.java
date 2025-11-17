@@ -41,17 +41,22 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flight_id")
     private Flight flight;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     public Reservation() {
     }
 
     public Reservation(Long reservation_id, Passengers passengers, LocalDateTime bookingDate, Status status,
-            Flight flight) {
+            Flight flight, Client client) {
         this.reservation_id = reservation_id;
         this.passengers = passengers;
         this.bookingDate = bookingDate;
         this.status = status;
         this.flight = flight;
+        this.client = client;
     }
 
     public Long getReservation_id() {
@@ -86,10 +91,26 @@ public class Reservation {
         this.status = status;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
-        return "Reservation [reservation_id=" + reservation_id + ", passengers="
-                + passengers + ", bookingDate=" + bookingDate + ", status=" + status + ", flight=" + flight + "]";
+        return "Reservation [reservation_id=" + reservation_id + ", passengers=" + passengers + ", bookingDate="
+                + bookingDate + ", status=" + status + ", flight=" + flight + ", client=" + client + "]";
     }
     
 }

@@ -5,15 +5,15 @@ import java.util.Objects;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public final class UserEmail {
+public final class ClientEmail {
     
     private final String email;
     
-    public UserEmail(){
+    public ClientEmail(){
         this.email = null;
     }
     
-    public UserEmail(String email){
+    public ClientEmail(String email){
         this.email = email;
     }
 
@@ -34,7 +34,7 @@ public final class UserEmail {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        UserEmail other = (UserEmail) obj;
+        ClientEmail other = (ClientEmail) obj;
         if (email == null) {
             if (other.email != null)
                 return false;

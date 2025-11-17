@@ -1,5 +1,7 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.Set;
+
 import com.airport.ProjectBookingFlights.model.vo.ClientEmail;
 
 import jakarta.persistence.AttributeOverride;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,14 +32,18 @@ public class Client {
     @AttributeOverride(name = "email", column = @Column(name = "email", length = 120, nullable = false))
     private ClientEmail email;
     
+    @OneToMany(mappedBy = "client")
+    private Set<Reservation> reservations;
+    
     public Client(){
     }
 
-    public Client(Long client_id, String name, String firstName, ClientEmail email) {
+    public Client(Long client_id, String name, String firstName, ClientEmail email, Set<Reservation> reservations) {
         this.client_id = client_id;
         this.name = name;
         this.firstName = firstName;
         this.email = email;
+        this.reservations = reservations;
     }
 
     public Long getClient_id() {
@@ -70,7 +77,19 @@ public class Client {
     public void setEmail(ClientEmail email) {
         this.email = email;
     }
-    
-    
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    @Override
+    public String toString() {
+        return "Client [client_id=" + client_id + ", name=" + name + ", firstName=" + firstName + ", email=" + email
+                + ", reservations=" + reservations + "]";
+    }
     
 }
