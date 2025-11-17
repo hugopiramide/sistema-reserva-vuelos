@@ -29,9 +29,6 @@ public class Reservation {
     @AttributeOverride(name = "email", column = @Column(name = "user_email", length = 120, nullable = false))
     private UserEmail userEmail;
 
-    /* Relation @ManyToOne */
-    private Flight flight;
-
     @Embedded
     @AttributeOverride(name = "total", column = @Column(name = "passengers", length = 4))
     private Passengers passengers;
@@ -46,10 +43,9 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(UserEmail userEmail, Flight flight, Passengers passengers, LocalDateTime bookingDate,
+    public Reservation(UserEmail userEmail, Passengers passengers, LocalDateTime bookingDate,
             Status status) {
         this.userEmail = userEmail;
-        this.flight = flight;
         this.passengers = passengers;
         this.bookingDate = bookingDate;
         this.status = status;
@@ -69,14 +65,6 @@ public class Reservation {
 
     public void setUserEmail(UserEmail userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
     }
 
     public Passengers getPassengers() {
