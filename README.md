@@ -10,15 +10,15 @@
 
 - Relación: Muchos a Uno (ManyToOne) en ambos casos desde Flight a Airport.
 
-### Reservation y Flight:
+### Client y Flight --> Reservation:
 
-- Una Reservation está ligada a un único Flight.
+- Un Client puede tener muchas Reservation a lo largo del tiempo
 
-- Un Flight puede tener muchas Reservation asociadas.
+- Un Flight también puede tener muchas Reservation a lo largo del tiempo
 
-- Relación: Muchos a Uno (ManyToOne) desde Reservation a Flight.
+- Relación: Mucho a Uno (ManyToOne) tanto en Client como en Flight, creando así un tabla con información 
 
-### Flight y Service
+### Flight y Service:
 
 - Un Flight ofrece varios Service
 
