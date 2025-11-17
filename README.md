@@ -17,3 +17,7 @@
 - Un Flight puede tener muchas Reservation asociadas.
 
 - Relación: Muchos a Uno (ManyToOne) desde Reservation a Flight.
+
+## Modelo Previsto
+
+<img src="./Model.svg" alt="Modelo de clases">
