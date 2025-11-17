@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +20,12 @@ public class Flight {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long flight_id;
     
-    /* Relation @ManytoOne */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "origin_airport")
     private Airport originAirport;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "destination_airport")
     private Airport destinationAirport;
 
     @Column(name = "departure_time", nullable = false)
@@ -81,6 +88,22 @@ public class Flight {
 
     public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public Airport getOriginAirport() {
+        return originAirport;
+    }
+
+    public void setOriginAirport(Airport originAirport) {
+        this.originAirport = originAirport;
+    }
+
+    public Airport getDestinationAirport() {
+        return destinationAirport;
+    }
+
+    public void setDestinationAirport(Airport destinationAirport) {
+        this.destinationAirport = destinationAirport;
     }
 
     @Override

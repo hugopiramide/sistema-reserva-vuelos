@@ -1,5 +1,7 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.Set;
+
 import com.airport.ProjectBookingFlights.model.vo.City;
 
 import jakarta.persistence.AttributeOverride;
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +32,12 @@ public class Airport {
         @AttributeOverride( name = "country", column = @Column(name = "country", length = 55))
     })
     private City city;
+    
+    @OneToMany(mappedBy = "originAirport")
+    private Set<Flight> originFlights;
+
+    @OneToMany(mappedBy = "destinationAirport")
+    private Set<Flight> destinationFlights;
 
     public Airport(){
     }
@@ -62,7 +71,27 @@ public class Airport {
     public void setCity(City city) {
         this.city = city;
     }
-    
-    
+
+    public Set<Flight> getOriginFlights() {
+        return originFlights;
+    }
+
+    public void setOriginFlights(Set<Flight> originFlights) {
+        this.originFlights = originFlights;
+    }
+
+    public Set<Flight> getDestinationFlights() {
+        return destinationFlights;
+    }
+
+    public void setDestinationFlights(Set<Flight> destinationFlights) {
+        this.destinationFlights = destinationFlights;
+    }
+
+    @Override
+    public String toString() {
+        return "Airport [airpor_id=" + airpor_id + ", name=" + name + ", city=" + city + ", originFlights="
+                + originFlights + ", destinationFlights=" + destinationFlights + "]";
+    }
 
 }
