@@ -1,12 +1,16 @@
 package com.airport.ProjectBookingFlights.model.vo;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public final class ClientEmail {
-    
+
+    private static final String 
+    REGEX_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
     private final String email;
     
     public ClientEmail(){
@@ -14,6 +18,7 @@ public final class ClientEmail {
     }
     
     public ClientEmail(String email){
+        if(patternMatches(email, REGEX_PATTERN)) throw new MatchException( "El email :" + email + ", no es válido", null);
         this.email = email;
     }
 
@@ -41,6 +46,12 @@ public final class ClientEmail {
         } else if (!email.equals(other.email))
             return false;
         return true;
+    }
+    
+    public static boolean patternMatches(String email, String regexPattern) {
+        return Pattern.compile(regexPattern)
+        .matcher(email)
+        .matches();
     }
     
 }
