@@ -1,10 +1,13 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Service {
     
     @Column(name = "description", length = 255)
     private String description;
+    
+    @ManyToMany(mappedBy = "services")
+    private Set<Flight> flights;
 
     public Service() {
         
