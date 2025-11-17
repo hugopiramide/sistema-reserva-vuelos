@@ -12,9 +12,12 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,15 +43,20 @@ public class Reservation {
     @Column(name = "status", nullable = false)
     private Status status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
+
     public Reservation() {
     }
 
-    public Reservation(UserEmail userEmail, Passengers passengers, LocalDateTime bookingDate,
-            Status status) {
+    public Reservation(UserEmail userEmail, Passengers passengers, LocalDateTime bookingDate, Status status,
+            Flight flight) {
         this.userEmail = userEmail;
         this.passengers = passengers;
         this.bookingDate = bookingDate;
         this.status = status;
+        this.flight = flight;
     }
 
     public Long getReservation_id() {
@@ -89,6 +97,12 @@ public class Reservation {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation [reservation_id=" + reservation_id + ", userEmail=" + userEmail + ", passengers="
+                + passengers + ", bookingDate=" + bookingDate + ", status=" + status + ", flight=" + flight + "]";
     }
     
 }

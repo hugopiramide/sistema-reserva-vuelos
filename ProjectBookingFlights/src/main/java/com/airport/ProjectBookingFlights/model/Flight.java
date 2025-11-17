@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +48,9 @@ public class Flight {
         inverseJoinColumns = @JoinColumn(name = "service_id")
     )
     private Set<Service> services;
+    
+    @OneToMany(mappedBy = "flight")
+    private Set<Reservation> reservations;
 
     public Flight(){
     }
