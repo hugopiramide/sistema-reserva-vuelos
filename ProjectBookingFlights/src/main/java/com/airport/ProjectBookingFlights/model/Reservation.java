@@ -51,6 +51,15 @@ public class Reservation {
         this.client = client;
     }
 
+    /* Pongo el Status.CONFIRMED por defecto al crear una Reserva (Este a lo largo del programa, podrá modificarse, etc.) */
+
+    public Reservation(LocalDateTime bookingDate, Flight flight, Client client) {
+        this.bookingDate = bookingDate;
+        this.flight = flight;
+        this.client = client;
+        this.status = Status.CONFIRMED;
+    }
+
     public Long getReservation_id() {
         return reservation_id;
     }
