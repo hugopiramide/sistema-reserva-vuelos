@@ -3,11 +3,8 @@ package com.airport.ProjectBookingFlights.model;
 import java.time.LocalDateTime;
 
 import com.airport.ProjectBookingFlights.model.enums.Status;
-import com.airport.ProjectBookingFlights.model.vo.Passengers;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,10 +24,6 @@ public class Reservation {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long reservation_id;
 
-    @Embedded
-    @AttributeOverride(name = "total", column = @Column(name = "passengers", length = 4))
-    private Passengers passengers;
-
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 
@@ -49,10 +42,9 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Long reservation_id, Passengers passengers, LocalDateTime bookingDate, Status status,
+    public Reservation(Long reservation_id, LocalDateTime bookingDate, Status status,
             Flight flight, Client client) {
         this.reservation_id = reservation_id;
-        this.passengers = passengers;
         this.bookingDate = bookingDate;
         this.status = status;
         this.flight = flight;
@@ -65,14 +57,6 @@ public class Reservation {
 
     public void setReservation_id(Long reservation_id) {
         this.reservation_id = reservation_id;
-    }
-
-    public Passengers getPassengers() {
-        return passengers;
-    }
-
-    public void setPassengers(Passengers passengers) {
-        this.passengers = passengers;
     }
 
     public LocalDateTime getBookingDate() {
@@ -109,8 +93,8 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation [reservation_id=" + reservation_id + ", passengers=" + passengers + ", bookingDate="
-                + bookingDate + ", status=" + status + ", flight=" + flight + ", client=" + client + "]";
+        return "Reservation [reservation_id=" + reservation_id + ", bookingDate=" + bookingDate + ", status=" + status
+                + ", flight=" + flight + ", client=" + client + "]";
     }
-    
+
 }

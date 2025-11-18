@@ -1,7 +1,5 @@
 package com.airport.ProjectBookingFlights.model.dto;
 
-import java.util.Set;
-
 public class ClientResponseDTO {
     
     private String name;

@@ -3,7 +3,11 @@ package com.airport.ProjectBookingFlights.model;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.airport.ProjectBookingFlights.model.vo.Passengers;
+
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -36,8 +40,11 @@ public class Flight {
     private LocalDateTime departureTime;
     @Column(name = "arrival_time", nullable = true)
     private LocalDateTime arrivalTime;
-    @Column(name = "capacity", nullable = false, length = 4)
-    private Integer capacity;
+
+    @Embedded
+    @AttributeOverride(name = "total", column = @Column(name = "passengers", length = 4))
+    private Passengers passengers;
+
     @Column(name = "available_seats", length = 4)
     private Integer availableSeats;
     
@@ -56,13 +63,16 @@ public class Flight {
     }
 
     public Flight(Airport originAirport, Airport destinationAirport, LocalDateTime departureTime,
-            LocalDateTime arrivalTime, Integer capacity, Integer availableSeats) {
+            LocalDateTime arrivalTime, Passengers passengers, Integer availableSeats, Set<Service> services,
+            Set<Reservation> reservations) {
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-        this.capacity = capacity;
+        this.passengers = passengers;
         this.availableSeats = availableSeats;
+        this.services = services;
+        this.reservations = reservations;
     }
 
     public Long getFlight_id() {
@@ -89,12 +99,28 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public Integer getCapacity() {
-        return capacity;
+    public Passengers getPassengers() {
+        return passengers;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setPassengers(Passengers passengers) {
+        this.passengers = passengers;
+    }
+
+    public Set<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<Service> services) {
+        this.services = services;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Integer getAvailableSeats() {
@@ -125,7 +151,8 @@ public class Flight {
     public String toString() {
         return "Flight [flight_id=" + flight_id + ", originAirport=" + originAirport + ", destinationAirport="
                 + destinationAirport + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime
-                + ", capacity=" + capacity + ", availableSeats=" + availableSeats + "]";
+                + ", passengers=" + passengers + ", availableSeats=" + availableSeats + ", services=" + services
+                + ", reservations=" + reservations + "]";
     }
-    
+
 }
