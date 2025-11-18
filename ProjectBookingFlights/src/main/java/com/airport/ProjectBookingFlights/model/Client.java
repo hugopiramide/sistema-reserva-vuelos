@@ -1,5 +1,6 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.airport.ProjectBookingFlights.model.vo.ClientEmail;
@@ -33,17 +34,16 @@ public class Client {
     private ClientEmail email;
     
     @OneToMany(mappedBy = "client")
-    private Set<Reservation> reservations;
+    private Set<Reservation> reservations = new HashSet<>();
     
     public Client(){
     }
 
-    public Client(Long client_id, String name, String firstName, ClientEmail email, Set<Reservation> reservations) {
+    public Client(Long client_id, String name, String firstName, ClientEmail email) {
         this.client_id = client_id;
         this.name = name;
         this.firstName = firstName;
         this.email = email;
-        this.reservations = reservations;
     }
 
     public Long getClient_id() {

@@ -1,5 +1,6 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -25,7 +26,7 @@ public class Service {
     private String description;
     
     @ManyToMany(mappedBy = "services")
-    private Set<Flight> flights;
+    private Set<Flight> flights = new HashSet<>();
 
     public Service() {
         

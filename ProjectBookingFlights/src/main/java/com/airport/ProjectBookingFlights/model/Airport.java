@@ -1,5 +1,6 @@
 package com.airport.ProjectBookingFlights.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.airport.ProjectBookingFlights.model.vo.City;
@@ -34,10 +35,10 @@ public class Airport {
     private City city;
     
     @OneToMany(mappedBy = "originAirport")
-    private Set<Flight> originFlights;
+    private Set<Flight> originFlights = new HashSet<>();
 
     @OneToMany(mappedBy = "destinationAirport")
-    private Set<Flight> destinationFlights;
+    private Set<Flight> destinationFlights = new HashSet<>();
 
     public Airport(){
     }

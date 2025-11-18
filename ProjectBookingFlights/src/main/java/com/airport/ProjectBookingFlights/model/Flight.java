@@ -1,6 +1,7 @@
 package com.airport.ProjectBookingFlights.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.airport.ProjectBookingFlights.model.vo.Passengers;
@@ -54,25 +55,22 @@ public class Flight {
         joinColumns = @JoinColumn(name = "flight_id"),
         inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    private Set<Service> services;
+    private Set<Service> services = new HashSet<>();
     
     @OneToMany(mappedBy = "flight")
-    private Set<Reservation> reservations;
+    private Set<Reservation> reservations = new HashSet<>();
 
     public Flight(){
     }
 
     public Flight(Airport originAirport, Airport destinationAirport, LocalDateTime departureTime,
-            LocalDateTime arrivalTime, Passengers passengers, Integer availableSeats, Set<Service> services,
-            Set<Reservation> reservations) {
+            LocalDateTime arrivalTime, Passengers passengers, Integer availableSeats) {
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.passengers = passengers;
         this.availableSeats = availableSeats;
-        this.services = services;
-        this.reservations = reservations;
     }
 
     public Long getFlight_id() {
