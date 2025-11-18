@@ -1,12 +1,12 @@
-package com.airport.ProjectBookingFlights.model.dto;
+package com.airport.ProjectBookingFlights.model.dto.response;
 
-public class AirportRequestDTO {
-    
+public class AirportResponseDTO {
+
     private String name;
     private String location;
     private String country;
-    
-    public AirportRequestDTO(){
+
+    public AirportResponseDTO(){
         
     }
 
@@ -36,7 +36,7 @@ public class AirportRequestDTO {
 
     @Override
     public String toString() {
-        return "AirportRequestDTO [name=" + name + ", location=" + location + ", country=" + country + "]";
+        return "AirportResponseDTO [name=" + name + ", location=" + location + ", country=" + country + "]";
     }
     
 }

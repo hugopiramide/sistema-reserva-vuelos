@@ -1,4 +1,4 @@
-package com.airport.ProjectBookingFlights.model.dto;
+package com.airport.ProjectBookingFlights.model.dto.response;
 
 import java.time.LocalDateTime;
 
