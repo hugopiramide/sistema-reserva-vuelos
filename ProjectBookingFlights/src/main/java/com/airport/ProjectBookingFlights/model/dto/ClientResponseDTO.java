@@ -7,7 +7,6 @@ public class ClientResponseDTO {
     private String name;
     private String firstName;
     private String email;
-    private Set<ReservationResponseDTO> reservations;
 
     public ClientResponseDTO(){
 
@@ -31,17 +30,10 @@ public class ClientResponseDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Set<ReservationResponseDTO> getReservations() {
-        return reservations;
-    }
-    public void setReservations(Set<ReservationResponseDTO> reservations) {
-        this.reservations = reservations;
-    }
 
     @Override
     public String toString() {
-        return "ClientResponseDTO [name=" + name + ", firstName=" + firstName + ", email=" + email + ", reservations="
-                + reservations + "]";
+        return "ClientResponseDTO [name=" + name + ", firstName=" + firstName + ", email=" + email + "]";
     }
     
 }
