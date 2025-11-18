@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 public class ReservationResponseDTO {
     
-    private Integer totalPassengers;
     private LocalDateTime bookingDate;
     private String status;
     private FlightResponseDTO flight;
@@ -12,14 +11,6 @@ public class ReservationResponseDTO {
     
     public ReservationResponseDTO(){
         
-    }
-
-    public Integer getTotalPassengers() {
-        return totalPassengers;
-    }
-
-    public void setTotalPassengers(Integer totalPassengers) {
-        this.totalPassengers = totalPassengers;
     }
 
     public LocalDateTime getBookingDate() {
@@ -56,8 +47,8 @@ public class ReservationResponseDTO {
 
     @Override
     public String toString() {
-        return "ReservationResponseDTO [totalPassengers=" + totalPassengers + ", bookingDate=" + bookingDate
-                + ", status=" + status + ", flight=" + flight + ", client=" + client + "]";
+        return "ReservationResponseDTO [bookingDate=" + bookingDate + ", status=" + status + ", flight=" + flight
+                + ", client=" + client + "]";
     }
 
 }

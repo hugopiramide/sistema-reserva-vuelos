@@ -60,6 +60,15 @@ public class Reservation {
         this.status = Status.CONFIRMED;
     }
 
+    /* El bookingDate se puede definir al crear la propia Reserva ( .now() ) */
+
+    public Reservation(Flight flight, Client client) {
+        this.bookingDate = LocalDateTime.now();
+        this.flight = flight;
+        this.client = client;
+        this.status = Status.CONFIRMED;
+    }
+
     public Long getReservation_id() {
         return reservation_id;
     }
