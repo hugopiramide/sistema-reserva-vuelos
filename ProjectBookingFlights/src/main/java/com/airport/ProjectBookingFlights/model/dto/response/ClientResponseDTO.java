@@ -10,6 +10,12 @@ public class ClientResponseDTO {
 
     }
 
+    public ClientResponseDTO(String name, String firstName, String email) {
+        this.name = name;
+        this.firstName = firstName;
+        this.email = email;
+    }
+
     public String getName() {
         return name;
     }

@@ -13,6 +13,16 @@ public class FlightResponseDTO {
 
     public FlightResponseDTO(){  
     }
+    
+    public FlightResponseDTO(String originAirport, String destinationAirport, LocalDateTime departureTime,
+            LocalDateTime arrivalTime, Integer capacity, Integer availableSeats) {
+        this.originAirport = originAirport;
+        this.destinationAirport = destinationAirport;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.capacity = capacity;
+        this.availableSeats = availableSeats;
+    }
 
     public String getOriginAirport() {
         return originAirport;
