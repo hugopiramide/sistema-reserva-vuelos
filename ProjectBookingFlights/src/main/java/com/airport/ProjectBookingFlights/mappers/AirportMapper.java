@@ -13,4 +13,12 @@ public class AirportMapper {
         return airport;
     }
     
+    public static AirportRequestDTO toResponseDTO(Airport airport){
+        AirportRequestDTO dto = new AirportRequestDTO();
+        dto.setName(airport.getName());
+        dto.setCountry(airport.getCity().getCountry());
+        dto.setLocation(airport.getCity().getLocation());
+        return dto;
+    }
+    
 }
