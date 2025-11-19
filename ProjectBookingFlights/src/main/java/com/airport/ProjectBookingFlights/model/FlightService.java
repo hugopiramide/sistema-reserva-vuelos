@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "service")
-public class Service {
+public class FlightService {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -28,11 +28,11 @@ public class Service {
     @ManyToMany(mappedBy = "services")
     private Set<Flight> flights = new HashSet<>();
 
-    public Service() {
+    public FlightService() {
         
     }
 
-    public Service(String name, String description) {
+    public FlightService(String name, String description) {
         this.name = name;
         this.description = description;
     }

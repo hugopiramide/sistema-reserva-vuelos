@@ -1,11 +1,11 @@
 package com.airport.ProjectBookingFlights.model.dto.request;
 
-public class ServiceRequestDTO {
+public class FlightServiceRequestDTO {
     
     private String name;
     private String description;
     
-    public ServiceRequestDTO() {
+    public FlightServiceRequestDTO() {
     }
 
     public String getName() {
