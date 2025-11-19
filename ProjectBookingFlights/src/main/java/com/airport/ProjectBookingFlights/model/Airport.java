@@ -43,8 +43,7 @@ public class Airport {
     public Airport(){
     }
 
-    public Airport(Long airpor_id, String name, City city) {
-        this.airpor_id = airpor_id;
+    public Airport(String name, City city) {
         this.name = name;
         this.city = city;
     }

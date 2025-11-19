@@ -1,0 +1,16 @@
+package com.airport.ProjectBookingFlights.mappers;
+
+import com.airport.ProjectBookingFlights.model.Airport;
+import com.airport.ProjectBookingFlights.model.dto.request.AirportRequestDTO;
+import com.airport.ProjectBookingFlights.model.vo.City;
+
+public class AirportMapper {
+    
+    public static Airport toEntity(AirportRequestDTO airportRequestDTO){
+        Airport airport = new Airport();
+        airport.setName(airportRequestDTO.getName());
+        airport.setCity(new City(airportRequestDTO.getLocation(),airportRequestDTO.getCountry()));
+        return airport;
+    }
+    
+}

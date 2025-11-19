@@ -10,7 +10,7 @@ public final class Passengers{
     private final Integer total;
 
     public Passengers(){
-        this.total = null;
+        this.total = 0; 
     }
 
     public Passengers(Integer total){
