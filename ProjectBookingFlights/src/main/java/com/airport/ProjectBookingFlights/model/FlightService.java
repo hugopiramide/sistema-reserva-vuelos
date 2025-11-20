@@ -25,7 +25,7 @@ public class FlightService {
     @Column(name = "description", length = 255)
     private String description;
     
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "flightServices")
     private Set<Flight> flights = new HashSet<>();
 
     public FlightService() {
