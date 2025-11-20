@@ -8,11 +8,11 @@
 		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>edu.rico.rest</groupId>
-	<artifactId>Biblioteca</artifactId>
+	<groupId>com.airport</groupId>
+	<artifactId>ProjectBookingFlights</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Biblioteca</name>
-	<description>Proyecto simple para aprender fundamentos API REST con Spring Boot</description>
+	<name>ProjectBookingFlights</name>
+	<description>Proyecto sobre reservas de vuelos con Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
