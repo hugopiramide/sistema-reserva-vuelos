@@ -33,5 +33,16 @@ public class ReservationMapper {
         ));
         return response;
     }
+
+    public static void updateEntityFromDTO(Reservation existing, Flight flight, Client client, ReservationRequestDTO dto) {
+        if (existing == null || dto == null) return;
+
+        if (flight != null) {
+            existing.setFlight(flight);
+        }
+        if (client != null) {
+            existing.setClient(client);
+        }
+    }
     
 }

@@ -35,4 +35,25 @@ public class FlightMapper {
         dto.setCapacity(flight.getPassengers().getTotal());
         return dto;
     }
+
+    public static void updateEntityFromDTO(Flight flight, Airport origin, Airport destination, FlightRequestDTO dto) {
+        if (flight == null || dto == null) return;
+
+        if (origin != null) {
+            flight.setOriginAirport(origin);
+        }
+        if (destination != null) {
+            flight.setDestinationAirport(destination);
+        }
+        if (dto.getDepartureTime() != null) {
+            flight.setDepartureTime(dto.getDepartureTime());
+        }
+        if (dto.getArrivalTime() != null) {
+            flight.setArrivalTime(dto.getArrivalTime());
+        }
+        if (dto.getCapacity() != null) {
+            flight.setAvailableSeats(dto.getCapacity());
+            flight.setPassengers(new Passengers(dto.getCapacity()));
+        }
+    }
 }

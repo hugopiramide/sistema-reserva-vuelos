@@ -21,5 +21,21 @@ public class AirportMapper {
         dto.setLocation(airport.getCity().getLocation());
         return dto;
     }
+
+    public static void updateEntityFromDTO(Airport existingAirport, AirportRequestDTO dto) {
+            if (existingAirport == null || dto == null) {
+                return;
+            }
+
+            if( dto.getName() != null ){
+                existingAirport.setName(dto.getName());
+            }
+
+            if( dto.getCountry() != null || dto.getLocation() != null ){
+                City updatedCity = new City(dto.getLocation(),dto.getCountry());
+                existingAirport.setCity(updatedCity);
+            }
+
+        }
     
 }

@@ -19,4 +19,15 @@ public class FlightServiceMapper {
         dto.setDescription(flightService.getDescription());
         return dto;
     }
+
+    public static void updateEntityFromDTO(FlightService existing, FlightServiceRequestDTO dto) {
+        if (existing == null || dto == null) return;
+
+        if (dto.getName() != null) {
+            existing.setName(dto.getName());
+        }
+        if (dto.getDescription() != null) {
+            existing.setDescription(dto.getDescription());
+        }
+    }
 }

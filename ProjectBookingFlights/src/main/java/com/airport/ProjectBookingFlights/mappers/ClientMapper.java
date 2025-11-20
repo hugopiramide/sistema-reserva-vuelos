@@ -23,4 +23,18 @@ public class ClientMapper {
         return dto;
     }
 
+    public static void updateEntityFromDTO(Client existingClient, ClientRequestDTO dto) {
+        if (existingClient == null || dto == null) return;
+
+        if (dto.getName() != null) {
+            existingClient.setName(dto.getName());
+        }
+        if (dto.getFirstName() != null) {
+            existingClient.setFirstName(dto.getFirstName());
+        }
+        if (dto.getEmail() != null) {
+            existingClient.setEmail(new ClientEmail(dto.getEmail()));
+        }
+    }
+
 }
