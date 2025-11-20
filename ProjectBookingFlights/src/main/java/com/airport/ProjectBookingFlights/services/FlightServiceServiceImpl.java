@@ -3,12 +3,21 @@ package com.airport.ProjectBookingFlights.services;
 import com.airport.ProjectBookingFlights.services.interfaces.IFlightServiceService;
 import com.airport.ProjectBookingFlights.model.dto.request.FlightServiceRequestDTO;
 import com.airport.ProjectBookingFlights.model.dto.response.FlightServiceResponseDTO;
+import com.airport.ProjectBookingFlights.repositories.IFlightServiceRepository;
+
 import java.util.Set;
 import java.util.HashSet;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FlightServiceServiceImpl implements IFlightServiceService {
+
+    private IFlightServiceRepository flightServiceRepository;
+    
+    public FlightServiceServiceImpl(IFlightServiceRepository flightServiceRepository) {
+        this.flightServiceRepository = flightServiceRepository;
+    }
+
     @Override
     public FlightServiceResponseDTO insertFlightService(FlightServiceRequestDTO flightServiceRequestDTO) {
         // TODO: Implement logic
