@@ -18,7 +18,7 @@ public final class ClientEmail {
     }
     
     public ClientEmail(String email){
-        if(patternMatches(email, REGEX_PATTERN)) throw new MatchException( "El email :" + email + ", no es válido", null);
+        if(!patternMatches(email, REGEX_PATTERN)) throw new MatchException( "El email :" + email + ", no es válido", null);
         this.email = email;
     }
 
