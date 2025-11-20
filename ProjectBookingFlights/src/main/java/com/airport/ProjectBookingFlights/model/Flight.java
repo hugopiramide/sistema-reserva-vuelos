@@ -55,7 +55,7 @@ public class Flight {
         joinColumns = @JoinColumn(name = "flight_id"),
         inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    private Set<Service> services = new HashSet<>();
+    private Set<FlightService> flightServices = new HashSet<>();
     
     @OneToMany(mappedBy = "flight")
     private Set<Reservation> reservations = new HashSet<>();
@@ -105,12 +105,12 @@ public class Flight {
         this.passengers = passengers;
     }
 
-    public Set<Service> getServices() {
-        return services;
+     public Set<FlightService> getFlightServices() {
+        return flightServices;
     }
 
-    public void setServices(Set<Service> services) {
-        this.services = services;
+    public void setFlightServices(Set<FlightService> flightServices) {
+        this.flightServices = flightServices;
     }
 
     public Set<Reservation> getReservations() {
@@ -149,8 +149,8 @@ public class Flight {
     public String toString() {
         return "Flight [flight_id=" + flight_id + ", originAirport=" + originAirport + ", destinationAirport="
                 + destinationAirport + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime
-                + ", passengers=" + passengers + ", availableSeats=" + availableSeats + ", services=" + services
-                + ", reservations=" + reservations + "]";
+                + ", passengers=" + passengers + ", availableSeats=" + availableSeats + ", flightServices="
+                + flightServices + ", reservations=" + reservations + "]";
     }
-
+    
 }
