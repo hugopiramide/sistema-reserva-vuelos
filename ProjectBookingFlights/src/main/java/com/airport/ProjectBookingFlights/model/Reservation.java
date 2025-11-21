@@ -19,9 +19,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "reservation")
 public class Reservation {
-    
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservation_id;
 
     @Column(name = "booking_date", nullable = false)
@@ -34,7 +34,7 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flight_id")
     private Flight flight;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -51,7 +51,10 @@ public class Reservation {
         this.client = client;
     }
 
-    /* Pongo el Status.CONFIRMED por defecto al crear una Reserva (Este a lo largo del programa, podrá modificarse, etc.) */
+    /*
+     * Pongo el Status.CONFIRMED por defecto al crear una Reserva (Este a lo largo
+     * del programa, podrá modificarse, etc.)
+     */
 
     public Reservation(LocalDateTime bookingDate, Flight flight, Client client) {
         this.bookingDate = bookingDate;

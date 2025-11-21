@@ -24,11 +24,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "flight")
 public class Flight {
-    
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long flight_id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "origin_airport_id")
     private Airport originAirport;
@@ -48,19 +48,15 @@ public class Flight {
 
     @Column(name = "available_seats", length = 4)
     private Integer availableSeats;
-    
+
     @ManyToMany
-    @JoinTable(
-        name = "service_flight",
-        joinColumns = @JoinColumn(name = "flight_id"),
-        inverseJoinColumns = @JoinColumn(name = "service_id")
-    )
+    @JoinTable(name = "service_flight", joinColumns = @JoinColumn(name = "flight_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
     private Set<FlightService> flightServices = new HashSet<>();
-    
-    @OneToMany(mappedBy = "flight")
+
+    @OneToMany(mappedBy = "flight", orphanRemoval = true)
     private Set<Reservation> reservations = new HashSet<>();
 
-    public Flight(){
+    public Flight() {
     }
 
     public Flight(Airport originAirport, Airport destinationAirport, LocalDateTime departureTime,
@@ -105,7 +101,7 @@ public class Flight {
         this.passengers = passengers;
     }
 
-     public Set<FlightService> getFlightServices() {
+    public Set<FlightService> getFlightServices() {
         return flightServices;
     }
 
@@ -152,5 +148,5 @@ public class Flight {
                 + ", passengers=" + passengers + ", availableSeats=" + availableSeats + ", flightServices="
                 + flightServices + ", reservations=" + reservations + "]";
     }
-    
+
 }

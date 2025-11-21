@@ -14,22 +14,22 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "service")
 public class FlightService {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long service_id;
-    
+
     @Column(name = "name", length = 100)
     private String name;
-    
+
     @Column(name = "description", length = 255)
     private String description;
-    
+
     @ManyToMany(mappedBy = "flightServices")
     private Set<Flight> flights = new HashSet<>();
 
     public FlightService() {
-        
+
     }
 
     public FlightService(String name, String description) {
@@ -65,5 +65,5 @@ public class FlightService {
     public String toString() {
         return "Service [service_id=" + service_id + ", name=" + name + ", description=" + description + "]";
     }
-    
+
 }

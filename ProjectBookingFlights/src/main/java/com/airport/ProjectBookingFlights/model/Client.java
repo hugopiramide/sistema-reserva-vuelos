@@ -18,25 +18,25 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "client")
 public class Client {
-    
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long client_id;
-    
+
     @Column(name = "name", length = 50, nullable = false)
     private String name;
-    
+
     @Column(name = "first_name", length = 120, nullable = true)
     private String firstName;
-    
+
     @Embedded
     @AttributeOverride(name = "email", column = @Column(name = "email", length = 120, nullable = false))
     private ClientEmail email;
-    
-    @OneToMany(mappedBy = "client")
+
+    @OneToMany(mappedBy = "client", orphanRemoval = true)
     private Set<Reservation> reservations = new HashSet<>();
-    
-    public Client(){
+
+    public Client() {
     }
 
     public Client(Long client_id, String name, String firstName, ClientEmail email) {

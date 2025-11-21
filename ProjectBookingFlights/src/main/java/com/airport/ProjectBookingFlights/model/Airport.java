@@ -19,9 +19,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "airport")
 public class Airport {
-    
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long airpor_id;
 
     @Column(name = "name", length = 55)
@@ -29,18 +29,18 @@ public class Airport {
 
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride( name = "location", column = @Column(name = "location", length = 100)),
-        @AttributeOverride( name = "country", column = @Column(name = "country", length = 55))
+            @AttributeOverride(name = "location", column = @Column(name = "location", length = 100)),
+            @AttributeOverride(name = "country", column = @Column(name = "country", length = 55))
     })
     private City city;
-    
-    @OneToMany(mappedBy = "originAirport")
+
+    @OneToMany(mappedBy = "originAirport", orphanRemoval = true)
     private Set<Flight> originFlights = new HashSet<>();
 
-    @OneToMany(mappedBy = "destinationAirport")
+    @OneToMany(mappedBy = "destinationAirport", orphanRemoval = true)
     private Set<Flight> destinationFlights = new HashSet<>();
 
-    public Airport(){
+    public Airport() {
     }
 
     public Airport(String name, City city) {
