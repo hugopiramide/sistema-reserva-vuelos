@@ -7,6 +7,7 @@ import com.airport.ProjectBookingFlights.model.dto.request.ReservationRequestDTO
 import com.airport.ProjectBookingFlights.model.dto.response.ClientResponseDTO;
 import com.airport.ProjectBookingFlights.model.dto.response.FlightResponseDTO;
 import com.airport.ProjectBookingFlights.model.dto.response.ReservationResponseDTO;
+import com.airport.ProjectBookingFlights.model.vo.ClientEmail;
 
 public class ReservationMapper {
 
@@ -22,7 +23,7 @@ public class ReservationMapper {
         response.setClient(new ClientResponseDTO(
                 reservation.getClient().getName(),
                 reservation.getClient().getFirstName(),
-                response.getClient().getEmail()));
+                reservation.getClient().getEmail().getEmail()));
         response.setFlight(new FlightResponseDTO(
                 reservation.getFlight().getOriginAirport().getName(),
                 reservation.getFlight().getDestinationAirport().getName(),
