@@ -13,6 +13,8 @@ public interface IReservationService {
 
 	public ReservationResponseDTO listReservationById(Long id);
 
+	public Set<ReservationResponseDTO> findByAirportId(Long airportId);
+
 	public ReservationResponseDTO updateById(Long id, ReservationRequestDTO reservationRequestDTO);
 
 	public void deleteById(Long id);

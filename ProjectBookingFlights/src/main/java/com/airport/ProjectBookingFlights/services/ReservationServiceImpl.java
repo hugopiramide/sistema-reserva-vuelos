@@ -4,6 +4,7 @@ import com.airport.ProjectBookingFlights.services.interfaces.IReservationService
 import com.airport.ProjectBookingFlights.model.dto.request.ReservationRequestDTO;
 import com.airport.ProjectBookingFlights.model.dto.response.ReservationResponseDTO;
 import com.airport.ProjectBookingFlights.repositories.IReservationRepository;
+import java.util.stream.Collectors;
 import com.airport.ProjectBookingFlights.repositories.IFlightRepository;
 import com.airport.ProjectBookingFlights.repositories.IClientRepository;
 import com.airport.ProjectBookingFlights.mappers.ReservationMapper;
@@ -80,8 +81,7 @@ public class ReservationServiceImpl implements IReservationService {
         }
         if (reservationRequestDTO.getClientId() != null) {
             client = clientRepository.findById(reservationRequestDTO.getClientId())
-                .orElseThrow(() -> new IllegalArgumentException("Client no encontrado"));
-        }
+                .orElseThrow(() -> new IllegalArgumentException("Client no encontrado")); }
 
         ReservationMapper.updateEntityFromDTO(existing, flight, client, reservationRequestDTO);
 
@@ -97,4 +97,13 @@ public class ReservationServiceImpl implements IReservationService {
         }
         reservationRepository.deleteById(id);
     }
+
+    @Override
+    public Set<ReservationResponseDTO> findByAirportId(Long airportId) {
+        if (airportId == null) throw new IllegalArgumentException("airportId no puede ser nulo");
+        return reservationRepository.findByAirportId(airportId).stream()
+            .map(ReservationMapper::toResponseDTO)
+            .collect(Collectors.toSet());
+    }
+
 }

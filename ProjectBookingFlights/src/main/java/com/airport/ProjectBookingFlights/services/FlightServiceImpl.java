@@ -91,4 +91,13 @@ public class FlightServiceImpl implements IFlightService {
         }
         flightRepository.deleteById(id);
     }
+
+    @Override
+    public Set<FlightResponseDTO> findFlightsByClientId(Long clientId) {
+        if (clientId == null) throw new IllegalArgumentException("clientId no puede ser nulo");
+        return flightRepository.findFlightsByClientId(clientId).stream()
+            .map(FlightMapper::toResponseDTO)
+            .collect(java.util.stream.Collectors.toSet());
+    }
+
 }

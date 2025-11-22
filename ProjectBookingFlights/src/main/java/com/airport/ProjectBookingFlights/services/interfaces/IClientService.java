@@ -16,4 +16,6 @@ public interface IClientService {
 	public ClientResponseDTO updateById(Long id, ClientRequestDTO clientRequestDTO);
 
 	public void deleteById(Long id);
+
+	public Set<ClientResponseDTO> findClientsWithMoreThanNReservations(Long minReservations);
 }

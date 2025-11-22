@@ -16,4 +16,6 @@ public interface IFlightService {
 	public FlightResponseDTO updateById(Long id, FlightRequestDTO flightRequestDTO);
 
 	public void deleteById(Long id);
+
+	public Set<FlightResponseDTO> findFlightsByClientId(Long clientId);
 }

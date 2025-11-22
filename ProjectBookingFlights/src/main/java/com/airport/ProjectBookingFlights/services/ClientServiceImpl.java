@@ -69,4 +69,13 @@ public class ClientServiceImpl implements IClientService {
         }
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public Set<ClientResponseDTO> findClientsWithMoreThanNReservations(Long minReservations) {
+        if (minReservations < 0) throw new IllegalArgumentException("minReservations no puede ser negativo");
+        return clientRepository.findClientsWithMoreThanNReservations(minReservations).stream()
+            .map(com.airport.ProjectBookingFlights.mappers.ClientMapper::toResponse)
+            .collect(java.util.stream.Collectors.toSet());
+    }
+
 }

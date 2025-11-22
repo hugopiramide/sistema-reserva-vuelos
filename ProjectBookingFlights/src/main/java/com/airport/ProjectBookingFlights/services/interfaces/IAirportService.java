@@ -16,4 +16,6 @@ public interface IAirportService {
     public AirportResponseDTO updateById(Long id, AirportRequestDTO airportRequestDTO);
 
     public void deleteById(Long id);
+
+    public Long countFlightsByAirportId(Long airportId);
 }

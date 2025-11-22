@@ -72,4 +72,11 @@ public class AirportServiceImpl implements IAirportService {
         }
         airportRepository.deleteById(id);
     }
+
+    @Override
+    public Long countFlightsByAirportId(Long airportId) {
+        if (airportId == null) throw new IllegalArgumentException("airportId no puede ser nulo");
+        return airportRepository.countFlightsByAirportId(airportId);
+    }
+
 }
