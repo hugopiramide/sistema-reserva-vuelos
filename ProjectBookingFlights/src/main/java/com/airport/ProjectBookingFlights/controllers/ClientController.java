@@ -36,6 +36,11 @@ public class ClientController {
         return clientService.listClientById(id);
     }
 
+    @GetMapping("/by-min-reservations/{min}")
+    public Set<ClientResponseDTO> getClientsWithMoreThanNReservations(@PathVariable Long min) {
+        return clientService.findClientsWithMoreThanNReservations(min);
+    }
+
     @PostMapping("/save")
     public ClientResponseDTO postClient(@RequestBody ClientRequestDTO clientRequestDTO) {
         return clientService.insertClient(clientRequestDTO);

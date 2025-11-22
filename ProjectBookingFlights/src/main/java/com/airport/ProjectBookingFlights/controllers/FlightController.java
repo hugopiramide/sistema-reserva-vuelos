@@ -36,6 +36,11 @@ public class FlightController {
         return flightService.listFlightById(id);
     }
 
+    @GetMapping("/by-client/{clientId}")
+    public Set<FlightResponseDTO> getFlightsByClient(@PathVariable Long clientId) {
+        return flightService.findFlightsByClientId(clientId);
+    }
+
     @PostMapping("/save")
     public FlightResponseDTO postFlight(@RequestBody FlightRequestDTO flightRequestDTO) {
         return flightService.insertFlight(flightRequestDTO);

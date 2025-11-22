@@ -36,6 +36,11 @@ public class AirportController {
         return airportService.listAirportById(id);
     }
 
+    @GetMapping("/{id}/flights/count")
+    public Long countFlightsByAirport(@PathVariable Long id) {
+        return airportService.countFlightsByAirportId(id);
+    }
+
     @PostMapping("/save")
     public AirportResponseDTO postAirport(@RequestBody AirportRequestDTO airportRequestDTO) {
         return airportService.insertAirport(airportRequestDTO);
