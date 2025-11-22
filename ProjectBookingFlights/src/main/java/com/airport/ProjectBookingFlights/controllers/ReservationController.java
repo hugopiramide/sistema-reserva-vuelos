@@ -36,6 +36,11 @@ public class ReservationController {
         return reservationService.listReservationById(id);
     }
 
+    @GetMapping("/by-airport/{airportId}")
+    public Set<ReservationResponseDTO> getReservationsByAirport(@PathVariable Long airportId) {
+        return reservationService.findByAirportId(airportId);
+    }
+
     @PostMapping("/save")
     public ReservationResponseDTO postReservation(@RequestBody ReservationRequestDTO reservationRequestDTO) {
         return reservationService.insertReservation(reservationRequestDTO);
@@ -48,4 +53,7 @@ public class ReservationController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
-ariable Long id) {
+        reservationService.deleteById(id);
+    }
+
+}
