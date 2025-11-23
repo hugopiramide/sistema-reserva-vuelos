@@ -37,7 +37,7 @@ public class AirportController {
     }
 
     @GetMapping("/{id}/flights/count")
-    public Long countFlightsByAirport(@PathVariable Long id) {
+    public int countFlightsByAirport(@PathVariable int id) {
         return airportService.countFlightsByAirportId(id);
     }
 
