@@ -18,7 +18,7 @@
 
 - Relación: Mucho a Uno (ManyToOne) tanto en Client como en Flight, creando así un tabla con información 
 
-### Flight y Service:
+### Flight y FligthService:
 
 - Un Flight ofrece varios Service
 
@@ -85,7 +85,3 @@ docker compose logs -f
 ```
 docker compose logs -f spring-app
 ```
-
-## Modelo Previsto
-
-<img src="./Model.svg" alt="Modelo de clases">
