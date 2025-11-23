@@ -22,7 +22,7 @@ public class Airport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long airpor_id;
+    private Long airport_id;
 
     @Column(name = "name", length = 55)
     private String name;
@@ -46,14 +46,6 @@ public class Airport {
     public Airport(String name, City city) {
         this.name = name;
         this.city = city;
-    }
-
-    public Long getAirpor_id() {
-        return airpor_id;
-    }
-
-    public void setAirpor_id(Long airpor_id) {
-        this.airpor_id = airpor_id;
     }
 
     public String getName() {
@@ -88,9 +80,17 @@ public class Airport {
         this.destinationFlights = destinationFlights;
     }
 
+    public Long getAirport_id() {
+        return airport_id;
+    }
+
+    public void setAirport_id(Long airport_id) {
+        this.airport_id = airport_id;
+    }
+
     @Override
     public String toString() {
-        return "Airport [airpor_id=" + airpor_id + ", name=" + name + ", city=" + city + ", originFlights="
+        return "Airport [airport_id=" + airport_id + ", name=" + name + ", city=" + city + ", originFlights="
                 + originFlights + ", destinationFlights=" + destinationFlights + "]";
     }
 
