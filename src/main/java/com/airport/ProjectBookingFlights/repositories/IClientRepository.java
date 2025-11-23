@@ -12,7 +12,7 @@ import com.airport.ProjectBookingFlights.model.Client;
 public interface IClientRepository extends JpaRepository<Client, Long>{
     
     // Clientes que han realizado más de N reservas
-    @Query("SELECT c FROM Client c WHERE SIZE(c.reservations) > :minReservations")
+    @Query("SELECT c FROM Client c WHERE SIZE(c.reservations) >= :minReservations")
     Set<Client> findClientsWithMoreThanNReservations(Long minReservations);
 
 }
