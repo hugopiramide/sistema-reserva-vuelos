@@ -41,17 +41,18 @@ public class FlightServiceController {
         return flightServiceService.findServicesByFlightId(flightId);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public FlightServiceResponseDTO postFlightService(@RequestBody FlightServiceRequestDTO flightServiceRequestDTO) {
         return flightServiceService.insertFlightService(flightServiceRequestDTO);
     }
 
-    @PutMapping("/save/{id}")
-    public FlightServiceResponseDTO putFlightServiceById(@PathVariable Long id, @RequestBody FlightServiceRequestDTO flightServiceRequestDTO) {
+    @PutMapping("/{id}")
+    public FlightServiceResponseDTO putFlightServiceById(@PathVariable Long id,
+            @RequestBody FlightServiceRequestDTO flightServiceRequestDTO) {
         return flightServiceService.updateById(id, flightServiceRequestDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         flightServiceService.deleteById(id);
     }

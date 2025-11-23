@@ -41,17 +41,18 @@ public class ReservationController {
         return reservationService.findByAirportId(airportId);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ReservationResponseDTO postReservation(@RequestBody ReservationRequestDTO reservationRequestDTO) {
         return reservationService.insertReservation(reservationRequestDTO);
     }
 
-    @PutMapping("/save/{id}")
-    public ReservationResponseDTO putReservationById(@PathVariable Long id, @RequestBody ReservationRequestDTO reservationRequestDTO) {
+    @PutMapping("/{id}")
+    public ReservationResponseDTO putReservationById(@PathVariable Long id,
+            @RequestBody ReservationRequestDTO reservationRequestDTO) {
         return reservationService.updateById(id, reservationRequestDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         reservationService.deleteById(id);
     }

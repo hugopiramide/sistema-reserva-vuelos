@@ -41,17 +41,17 @@ public class ClientController {
         return clientService.findClientsWithMoreThanNReservations(min);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ClientResponseDTO postClient(@RequestBody ClientRequestDTO clientRequestDTO) {
         return clientService.insertClient(clientRequestDTO);
     }
 
-    @PutMapping("/save/{id}")
+    @PutMapping("/{id}")
     public ClientResponseDTO putClientById(@PathVariable Long id, @RequestBody ClientRequestDTO clientRequestDTO) {
         return clientService.updateById(id, clientRequestDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         clientService.deleteById(id);
     }

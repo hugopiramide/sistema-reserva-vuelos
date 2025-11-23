@@ -41,17 +41,17 @@ public class AirportController {
         return airportService.countFlightsByAirportId(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public AirportResponseDTO postAirport(@RequestBody AirportRequestDTO airportRequestDTO) {
         return airportService.insertAirport(airportRequestDTO);
     }
 
-    @PutMapping("/save/{id}")
+    @PutMapping("/{id}")
     public AirportResponseDTO putAirportById(@PathVariable Long id, @RequestBody AirportRequestDTO airportRequestDTO) {
         return airportService.updateById(id, airportRequestDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         airportService.deleteById(id);
     }
