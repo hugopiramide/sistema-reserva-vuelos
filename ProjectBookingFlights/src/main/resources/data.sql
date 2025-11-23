@@ -1,9 +1,9 @@
 -- Airports
-INSERT INTO airport (airpor_id, name, location, country) VALUES (1, 'Aeropuerto A', 'Ciudad Uno', 'País Uno');
-INSERT INTO airport (airpor_id, name, location, country) VALUES (2, 'Aeropuerto B', 'Ciudad Dos', 'País Dos');
-INSERT INTO airport (airpor_id, name, location, country) VALUES (3, 'Aeropuerto C', 'Ciudad Tres', 'País Tres');
-INSERT INTO airport (airpor_id, name, location, country) VALUES (4, 'Aeropuerto D', 'Ciudad Cuatro', 'País Cuatro');
-INSERT INTO airport (airpor_id, name, location, country) VALUES (5, 'Aeropuerto E', 'Ciudad Cinco', 'País Cinco');
+INSERT INTO airport (airport_id, name, location, country) VALUES (1, 'Aeropuerto A', 'Ciudad Uno', 'País Uno');
+INSERT INTO airport (airport_id, name, location, country) VALUES (2, 'Aeropuerto B', 'Ciudad Dos', 'País Dos');
+INSERT INTO airport (airport_id, name, location, country) VALUES (3, 'Aeropuerto C', 'Ciudad Tres', 'País Tres');
+INSERT INTO airport (airport_id, name, location, country) VALUES (4, 'Aeropuerto D', 'Ciudad Cuatro', 'País Cuatro');
+INSERT INTO airport (airport_id, name, location, country) VALUES (5, 'Aeropuerto E', 'Ciudad Cinco', 'País Cinco');
 
 
 -- Clients
