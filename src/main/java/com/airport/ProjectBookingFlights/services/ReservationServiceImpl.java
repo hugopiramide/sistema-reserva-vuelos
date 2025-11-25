@@ -32,78 +32,108 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public ReservationResponseDTO insertReservation(ReservationRequestDTO reservationRequestDTO) {
-        if (reservationRequestDTO == null) {
-            throw new IllegalArgumentException("ReservationRequestDTO no puede ser nulo");
+        try {
+            if (reservationRequestDTO == null) {
+                throw new IllegalArgumentException("ReservationRequestDTO no puede ser nulo");
+            }
+
+            Flight flight = flightRepository.findById(reservationRequestDTO.getFlightId())
+                .orElseThrow(() -> new IllegalArgumentException("Flight no encontrado"));
+
+            Client client = clientRepository.findById(reservationRequestDTO.getClientId())
+                .orElseThrow(() -> new IllegalArgumentException("Client no encontrado"));
+
+            Reservation reservation = ReservationMapper.toEntity(flight, client, reservationRequestDTO);
+            reservationRepository.save(reservation);
+
+            return ReservationMapper.toResponseDTO(reservation);
+        } catch (Exception e) {
+            System.err.println("Error en insertReservation: " + e.getMessage());
+            throw e;
         }
-
-        Flight flight = flightRepository.findById(reservationRequestDTO.getFlightId())
-            .orElseThrow(() -> new IllegalArgumentException("Flight no encontrado"));
-
-        Client client = clientRepository.findById(reservationRequestDTO.getClientId())
-            .orElseThrow(() -> new IllegalArgumentException("Client no encontrado"));
-
-        Reservation reservation = ReservationMapper.toEntity(flight, client, reservationRequestDTO);
-        reservationRepository.save(reservation);
-
-        return ReservationMapper.toResponseDTO(reservation);
     }
 
     @Override
     public Set<ReservationResponseDTO> listAllReservations() {
-        return reservationRepository.findAll().stream()
-            .map(ReservationMapper::toResponseDTO)
-            .collect(Collectors.toSet());
+        try {
+            return reservationRepository.findAll().stream()
+                .map(ReservationMapper::toResponseDTO)
+                .collect(Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en listAllReservations: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public ReservationResponseDTO listReservationById(Long id) {
-        Reservation reservation = reservationRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Reservation con ID " + id + " no encontrada"));
+        try {
+            Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Reservation con ID " + id + " no encontrada"));
 
-        return ReservationMapper.toResponseDTO(reservation);
+            return ReservationMapper.toResponseDTO(reservation);
+        } catch (Exception e) {
+            System.err.println("Error en listReservationById para id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public ReservationResponseDTO updateById(Long id, ReservationRequestDTO reservationRequestDTO) {
-        if (reservationRequestDTO == null) {
-            throw new IllegalArgumentException("ReservationRequestDTO no puede ser nulo");
+        try {
+            if (reservationRequestDTO == null) {
+                throw new IllegalArgumentException("ReservationRequestDTO no puede ser nulo");
+            }
+
+            Reservation existing = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Reservation con id " + id + " no existe"));
+
+            Flight flight = null;
+            Client client = null;
+
+            if (reservationRequestDTO.getFlightId() != null) {
+                flight = flightRepository.findById(reservationRequestDTO.getFlightId())
+                    .orElseThrow(() -> new IllegalArgumentException("Flight no encontrado"));
+            }
+            if (reservationRequestDTO.getClientId() != null) {
+                client = clientRepository.findById(reservationRequestDTO.getClientId())
+                    .orElseThrow(() -> new IllegalArgumentException("Client no encontrado")); }
+
+            ReservationMapper.updateEntityFromDTO(existing, flight, client, reservationRequestDTO);
+
+            Reservation updated = reservationRepository.save(existing);
+
+            return ReservationMapper.toResponseDTO(updated);
+        } catch (Exception e) {
+            System.err.println("Error en updateById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-
-        Reservation existing = reservationRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Reservation con id " + id + " no existe"));
-
-        Flight flight = null;
-        Client client = null;
-
-        if (reservationRequestDTO.getFlightId() != null) {
-            flight = flightRepository.findById(reservationRequestDTO.getFlightId())
-                .orElseThrow(() -> new IllegalArgumentException("Flight no encontrado"));
-        }
-        if (reservationRequestDTO.getClientId() != null) {
-            client = clientRepository.findById(reservationRequestDTO.getClientId())
-                .orElseThrow(() -> new IllegalArgumentException("Client no encontrado")); }
-
-        ReservationMapper.updateEntityFromDTO(existing, flight, client, reservationRequestDTO);
-
-        Reservation updated = reservationRepository.save(existing);
-
-        return ReservationMapper.toResponseDTO(updated);
     }
 
     @Override
     public void deleteById(Long id) {
-        if (!reservationRepository.existsById(id)) {
-            throw new IllegalArgumentException("Reservation con ID " + id + " no encontrada para eliminación");
+        try {
+            if (!reservationRepository.existsById(id)) {
+                throw new IllegalArgumentException("Reservation con ID " + id + " no encontrada para eliminación");
+            }
+            reservationRepository.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error en deleteById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-        reservationRepository.deleteById(id);
     }
 
     @Override
     public Set<ReservationResponseDTO> findByAirportId(Long airportId) {
-        if (airportId == null) throw new IllegalArgumentException("airportId no puede ser nulo");
-        return reservationRepository.findByAirportId(airportId).stream()
-            .map(ReservationMapper::toResponseDTO)
-            .collect(Collectors.toSet());
+        try {
+            if (airportId == null) throw new IllegalArgumentException("airportId no puede ser nulo");
+            return reservationRepository.findByAirportId(airportId).stream()
+                .map(ReservationMapper::toResponseDTO)
+                .collect(Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en findByAirportId para airportId " + airportId + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }

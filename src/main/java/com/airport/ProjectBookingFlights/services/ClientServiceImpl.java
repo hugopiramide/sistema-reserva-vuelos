@@ -22,60 +22,90 @@ public class ClientServiceImpl implements IClientService {
     
     @Override
     public ClientResponseDTO insertClient(ClientRequestDTO clientRequestDTO) {
-        if (clientRequestDTO == null) {
-            throw new IllegalArgumentException("ClientRequestDTO no puede ser nulo");
+        try {
+            if (clientRequestDTO == null) {
+                throw new IllegalArgumentException("ClientRequestDTO no puede ser nulo");
+            }
+
+            Client client = ClientMapper.toEntity(clientRequestDTO);
+            clientRepository.save(client);
+
+            return ClientMapper.toResponse(client);
+        } catch (Exception e) {
+            System.err.println("Error en insertClient: " + e.getMessage());
+            throw e;
         }
-
-        Client client = ClientMapper.toEntity(clientRequestDTO);
-        clientRepository.save(client);
-
-        return ClientMapper.toResponse(client);
     }
 
     @Override
     public Set<ClientResponseDTO> listAllClients() {
-        return clientRepository.findAll().stream()
-            .map(ClientMapper::toResponse)
-            .collect(Collectors.toSet());
+        try {
+            return clientRepository.findAll().stream()
+                .map(ClientMapper::toResponse)
+                .collect(Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en listAllClients: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public ClientResponseDTO listClientById(Long id) {
-        Client client = clientRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Cliente con ID " + id + " no encontrado"));
-        return ClientMapper.toResponse(client);
+        try {
+            Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente con ID " + id + " no encontrado"));
+            return ClientMapper.toResponse(client);
+        } catch (Exception e) {
+            System.err.println("Error en listClientById para id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public ClientResponseDTO updateById(Long id, ClientRequestDTO clientRequestDTO) {
-        if (clientRequestDTO == null) {
-            throw new IllegalArgumentException("ClientRequestDTO no puede ser nulo");
+        try {
+            if (clientRequestDTO == null) {
+                throw new IllegalArgumentException("ClientRequestDTO no puede ser nulo");
+            }
+
+            Client existing = clientRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente con id " + id + " no existe"));
+
+            ClientMapper.updateEntityFromDTO(existing, clientRequestDTO);
+
+            Client updated = clientRepository.save(existing);
+
+            return ClientMapper.toResponse(updated);
+        } catch (Exception e) {
+            System.err.println("Error en updateById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-
-        Client existing = clientRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Cliente con id " + id + " no existe"));
-
-        ClientMapper.updateEntityFromDTO(existing, clientRequestDTO);
-
-        Client updated = clientRepository.save(existing);
-
-        return ClientMapper.toResponse(updated);
     }
 
     @Override
     public void deleteById(Long id) {
-        if (!clientRepository.existsById(id)) {
-            throw new IllegalArgumentException("Cliente con ID " + id + " no encontrado para eliminación");
+        try {
+            if (!clientRepository.existsById(id)) {
+                throw new IllegalArgumentException("Cliente con ID " + id + " no encontrado para eliminación");
+            }
+            clientRepository.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error en deleteById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-        clientRepository.deleteById(id);
     }
 
     @Override
     public Set<ClientResponseDTO> findClientsWithMoreThanNReservations(Long minReservations) {
-        if (minReservations < 0) throw new IllegalArgumentException("minReservations no puede ser negativo");
-        return clientRepository.findClientsWithMoreThanNReservations(minReservations).stream()
-            .map(com.airport.ProjectBookingFlights.mappers.ClientMapper::toResponse)
-            .collect(java.util.stream.Collectors.toSet());
+        try {
+            if (minReservations < 0) throw new IllegalArgumentException("minReservations no puede ser negativo");
+            return clientRepository.findClientsWithMoreThanNReservations(minReservations).stream()
+                .map(com.airport.ProjectBookingFlights.mappers.ClientMapper::toResponse)
+                .collect(java.util.stream.Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en findClientsWithMoreThanNReservations: " + e.getMessage());
+            throw e;
+        }
     }
 
 }

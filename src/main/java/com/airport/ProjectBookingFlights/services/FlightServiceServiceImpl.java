@@ -22,61 +22,91 @@ public class FlightServiceServiceImpl implements IFlightServiceService {
 
     @Override
     public FlightServiceResponseDTO insertFlightService(FlightServiceRequestDTO flightServiceRequestDTO) {
-        if (flightServiceRequestDTO == null) {
-            throw new IllegalArgumentException("FlightServiceRequestDTO no puede ser nulo");
+        try {
+            if (flightServiceRequestDTO == null) {
+                throw new IllegalArgumentException("FlightServiceRequestDTO no puede ser nulo");
+            }
+
+            FlightService flightService = FlightServiceMapper.toEntity(flightServiceRequestDTO);
+            flightServiceRepository.save(flightService);
+
+            return FlightServiceMapper.toResponse(flightService);
+        } catch (Exception e) {
+            System.err.println("Error en insertFlightService: " + e.getMessage());
+            throw e;
         }
-
-        FlightService flightService = FlightServiceMapper.toEntity(flightServiceRequestDTO);
-        flightServiceRepository.save(flightService);
-
-        return FlightServiceMapper.toResponse(flightService);
     }
 
     @Override
     public Set<FlightServiceResponseDTO> listAllFlightServices() {
-        return flightServiceRepository.findAll().stream()
-            .map(FlightServiceMapper::toResponse)
-            .collect(Collectors.toSet());
+        try {
+            return flightServiceRepository.findAll().stream()
+                .map(FlightServiceMapper::toResponse)
+                .collect(Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en listAllFlightServices: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public FlightServiceResponseDTO listFlightServiceById(Long id) {
-        FlightService fs = flightServiceRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("FlightService con ID " + id + " no encontrado"));
+        try {
+            FlightService fs = flightServiceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("FlightService con ID " + id + " no encontrado"));
 
-        return FlightServiceMapper.toResponse(fs);
+            return FlightServiceMapper.toResponse(fs);
+        } catch (Exception e) {
+            System.err.println("Error en listFlightServiceById para id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public FlightServiceResponseDTO updateById(Long id, FlightServiceRequestDTO flightServiceRequestDTO) {
-        if (flightServiceRequestDTO == null) {
-            throw new IllegalArgumentException("FlightServiceRequestDTO no puede ser nulo");
+        try {
+            if (flightServiceRequestDTO == null) {
+                throw new IllegalArgumentException("FlightServiceRequestDTO no puede ser nulo");
+            }
+
+            FlightService existing = flightServiceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("FlightService con id " + id + " no existe"));
+
+            FlightServiceMapper.updateEntityFromDTO(existing, flightServiceRequestDTO);
+
+            FlightService updated = flightServiceRepository.save(existing);
+
+            return FlightServiceMapper.toResponse(updated);
+        } catch (Exception e) {
+            System.err.println("Error en updateById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-
-        FlightService existing = flightServiceRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("FlightService con id " + id + " no existe"));
-
-        FlightServiceMapper.updateEntityFromDTO(existing, flightServiceRequestDTO);
-
-        FlightService updated = flightServiceRepository.save(existing);
-
-        return FlightServiceMapper.toResponse(updated);
     }
 
     @Override
     public void deleteById(Long id) {
-        if (!flightServiceRepository.existsById(id)) {
-            throw new IllegalArgumentException("FlightService con ID " + id + " no encontrado para eliminación");
+        try {
+            if (!flightServiceRepository.existsById(id)) {
+                throw new IllegalArgumentException("FlightService con ID " + id + " no encontrado para eliminación");
+            }
+            flightServiceRepository.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error en deleteById para id " + id + ": " + e.getMessage());
+            throw e;
         }
-        flightServiceRepository.deleteById(id);
     }
 
     @Override
     public Set<FlightServiceResponseDTO> findServicesByFlightId(Long flightId) {
-        if (flightId == null) throw new IllegalArgumentException("flightId no puede ser nulo");
-        return flightServiceRepository.findServicesByFlightId(flightId).stream()
-            .map(FlightServiceMapper::toResponse)
-            .collect(java.util.stream.Collectors.toSet());
+        try {
+            if (flightId == null) throw new IllegalArgumentException("flightId no puede ser nulo");
+            return flightServiceRepository.findServicesByFlightId(flightId).stream()
+                .map(FlightServiceMapper::toResponse)
+                .collect(java.util.stream.Collectors.toSet());
+        } catch (Exception e) {
+            System.err.println("Error en findServicesByFlightId para flightId " + flightId + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }
