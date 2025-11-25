@@ -28,32 +28,62 @@ public class AirportController {
 
     @GetMapping
     public Set<AirportResponseDTO> getAllAirports() {
-        return airportService.listAllAirports();
+        try {
+            return airportService.listAllAirports();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todos los aeropuertos: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public AirportResponseDTO getAirportById(@PathVariable Long id) {
-        return airportService.listAirportById(id);
+        try {
+            return airportService.listAirportById(id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener aeropuerto por id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}/flights/count")
     public int countFlightsByAirport(@PathVariable int id) {
-        return airportService.countFlightsByAirportId(id);
+        try {
+            return airportService.countFlightsByAirportId(id);
+        } catch (Exception e) {
+            System.err.println("Error al contar vuelos para aeropuerto " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping
     public AirportResponseDTO postAirport(@RequestBody AirportRequestDTO airportRequestDTO) {
-        return airportService.insertAirport(airportRequestDTO);
+        try {
+            return airportService.insertAirport(airportRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al crear aeropuerto: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
     public AirportResponseDTO putAirportById(@PathVariable Long id, @RequestBody AirportRequestDTO airportRequestDTO) {
-        return airportService.updateById(id, airportRequestDTO);
+        try {
+            return airportService.updateById(id, airportRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar aeropuerto con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        airportService.deleteById(id);
+        try {
+            airportService.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar aeropuerto con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }

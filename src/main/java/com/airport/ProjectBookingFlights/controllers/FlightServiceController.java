@@ -28,33 +28,63 @@ public class FlightServiceController {
 
     @GetMapping
     public Set<FlightServiceResponseDTO> getAllFlightServices() {
-        return flightServiceService.listAllFlightServices();
+        try {
+            return flightServiceService.listAllFlightServices();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todos los servicios de vuelo: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public FlightServiceResponseDTO getFlightServiceById(@PathVariable Long id) {
-        return flightServiceService.listFlightServiceById(id);
+        try {
+            return flightServiceService.listFlightServiceById(id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener servicio de vuelo por id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/by-flight/{flightId}")
     public Set<FlightServiceResponseDTO> getServicesByFlight(@PathVariable Long flightId) {
-        return flightServiceService.findServicesByFlightId(flightId);
+        try {
+            return flightServiceService.findServicesByFlightId(flightId);
+        } catch (Exception e) {
+            System.err.println("Error al obtener servicios para el vuelo " + flightId + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping
     public FlightServiceResponseDTO postFlightService(@RequestBody FlightServiceRequestDTO flightServiceRequestDTO) {
-        return flightServiceService.insertFlightService(flightServiceRequestDTO);
+        try {
+            return flightServiceService.insertFlightService(flightServiceRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al crear servicio de vuelo: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
     public FlightServiceResponseDTO putFlightServiceById(@PathVariable Long id,
             @RequestBody FlightServiceRequestDTO flightServiceRequestDTO) {
-        return flightServiceService.updateById(id, flightServiceRequestDTO);
+        try {
+            return flightServiceService.updateById(id, flightServiceRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar servicio de vuelo con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        flightServiceService.deleteById(id);
+        try {
+            flightServiceService.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar servicio de vuelo con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }

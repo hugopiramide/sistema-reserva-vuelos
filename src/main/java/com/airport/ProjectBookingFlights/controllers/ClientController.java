@@ -28,32 +28,62 @@ public class ClientController {
 
     @GetMapping
     public Set<ClientResponseDTO> getAllClients() {
-        return clientService.listAllClients();
+        try {
+            return clientService.listAllClients();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todos los clientes: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public ClientResponseDTO getClientById(@PathVariable Long id) {
-        return clientService.listClientById(id);
+        try {
+            return clientService.listClientById(id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener cliente por id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/by-min-reservations/{min}")
     public Set<ClientResponseDTO> getClientsWithMoreThanNReservations(@PathVariable Long min) {
-        return clientService.findClientsWithMoreThanNReservations(min);
+        try {
+            return clientService.findClientsWithMoreThanNReservations(min);
+        } catch (Exception e) {
+            System.err.println("Error al buscar clientes con más de " + min + " reservaciones: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping
     public ClientResponseDTO postClient(@RequestBody ClientRequestDTO clientRequestDTO) {
-        return clientService.insertClient(clientRequestDTO);
+        try {
+            return clientService.insertClient(clientRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al crear cliente: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
     public ClientResponseDTO putClientById(@PathVariable Long id, @RequestBody ClientRequestDTO clientRequestDTO) {
-        return clientService.updateById(id, clientRequestDTO);
+        try {
+            return clientService.updateById(id, clientRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar cliente con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        clientService.deleteById(id);
+        try {
+            clientService.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar cliente con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }

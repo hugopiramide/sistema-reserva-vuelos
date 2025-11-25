@@ -28,33 +28,63 @@ public class ReservationController {
 
     @GetMapping
     public Set<ReservationResponseDTO> getAllReservations() {
-        return reservationService.listAllReservations();
+        try {
+            return reservationService.listAllReservations();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todas las reservaciones: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public ReservationResponseDTO getReservationById(@PathVariable Long id) {
-        return reservationService.listReservationById(id);
+        try {
+            return reservationService.listReservationById(id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener reservación por id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/by-airport/{airportId}")
     public Set<ReservationResponseDTO> getReservationsByAirport(@PathVariable Long airportId) {
-        return reservationService.findByAirportId(airportId);
+        try {
+            return reservationService.findByAirportId(airportId);
+        } catch (Exception e) {
+            System.err.println("Error al obtener reservaciones para aeropuerto " + airportId + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping
     public ReservationResponseDTO postReservation(@RequestBody ReservationRequestDTO reservationRequestDTO) {
-        return reservationService.insertReservation(reservationRequestDTO);
+        try {
+            return reservationService.insertReservation(reservationRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al crear reservación: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
     public ReservationResponseDTO putReservationById(@PathVariable Long id,
             @RequestBody ReservationRequestDTO reservationRequestDTO) {
-        return reservationService.updateById(id, reservationRequestDTO);
+        try {
+            return reservationService.updateById(id, reservationRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar reservación con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        reservationService.deleteById(id);
+        try {
+            reservationService.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar reservación con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }

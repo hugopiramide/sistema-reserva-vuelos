@@ -28,32 +28,62 @@ public class FlightController {
 
     @GetMapping
     public Set<FlightResponseDTO> getAllFlights() {
-        return flightService.listAllFlights();
+        try {
+            return flightService.listAllFlights();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todos los vuelos: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public FlightResponseDTO getFlightById(@PathVariable Long id) {
-        return flightService.listFlightById(id);
+        try {
+            return flightService.listFlightById(id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener vuelo por id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/by-client/{clientId}")
     public Set<FlightResponseDTO> getFlightsByClient(@PathVariable Long clientId) {
-        return flightService.findFlightsByClientId(clientId);
+        try {
+            return flightService.findFlightsByClientId(clientId);
+        } catch (Exception e) {
+            System.err.println("Error al obtener vuelos del cliente " + clientId + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping
     public FlightResponseDTO postFlight(@RequestBody FlightRequestDTO flightRequestDTO) {
-        return flightService.insertFlight(flightRequestDTO);
+        try {
+            return flightService.insertFlight(flightRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al crear vuelo: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
     public FlightResponseDTO putFlightById(@PathVariable Long id, @RequestBody FlightRequestDTO flightRequestDTO) {
-        return flightService.updateById(id, flightRequestDTO);
+        try {
+            return flightService.updateById(id, flightRequestDTO);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar vuelo con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        flightService.deleteById(id);
+        try {
+            flightService.deleteById(id);
+        } catch (Exception e) {
+            System.err.println("Error al eliminar vuelo con id " + id + ": " + e.getMessage());
+            throw e;
+        }
     }
 
 }
