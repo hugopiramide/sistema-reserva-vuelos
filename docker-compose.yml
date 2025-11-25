@@ -15,6 +15,7 @@ services:
   mysql:
     image: mysql
     container_name: airbooking
+    restart: always
     ports:
       - 3307:3306
     environment:
