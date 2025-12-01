@@ -1,16 +1,5 @@
 version: "3.8"
 services:
-  app:
-    build: .
-    container_name: spring-app
-    ports:
-      - ${APP_PORT}:${APP_PORT}
-    environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-    depends_on:
-      - mysql
 
   mysql:
     image: mysql
@@ -23,6 +12,18 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - airbooking_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: spring-app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - mysql
 
 volumes:
   airbooking_data:
